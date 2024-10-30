@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { MoonIcon, SunIcon } from 'lucide-react'
+import { MoonIcon, SunIcon, Sparkle } from "lucide-react";
 
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
@@ -25,7 +25,7 @@ const PullCalculator = () => {
   const [targetPulls, setTargetPulls] = useState("");
   const [rateStatus, setRateStatus] = useState("off");
   const [results, setResults] = useState(null);
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState("light");
 
   const [savedData, saveData] = useLocalStorage("genshinPullCalculator", {
     currentPrimo: "",
@@ -61,18 +61,37 @@ const PullCalculator = () => {
     const pullInfo = [90, 180, 270, 360, 450].map((pulls, index) => {
       const requiredPrimo = pulls * 160;
       const canPull = totalCurrentPrimo >= requiredPrimo;
-      let status = canPull ? "Bisa" : "Tidak bisa";
+      let statusText = canPull ? "Bisa" : "Tidak bisa";
 
-      if (canPull) {
-        if (rateStatus === "on") {
-          status += index % 2 === 0 ? ", guaranteed 5* banner" : ", 50/50";
-        } else {
-          status += index % 2 === 0 ? ", 50/50" : ", guaranteed 5* banner";
-        }
-      }
+      // Tentukan konten tambahan untuk status berdasarkan kondisi
+      const sparkleElement = <Sparkle color="#0afbff" />;
+      const additionalStatus =
+        rateStatus === "on" ? (
+          index % 2 === 0 ? (
+            <> , guaranteed banner {sparkleElement}</>
+          ) : (
+            ", 50/50"
+          )
+        ) : index % 2 === 0 ? (
+          ", 50/50"
+        ) : (
+          <> , guaranteed banner {sparkleElement}</>
+        );
 
-      return `${pulls}x pull: ${status}`;
+      // Gabungkan status dengan tambahan status jika bisa pull
+      let statusJSX = (
+        <div className="flex gap-2">
+          {pulls}x pull: {statusText} {canPull && additionalStatus}
+        </div>
+      );
+
+      return {
+        statusText,
+        statusJSX,
+      };
     });
+
+    
 
     setResults({
       targetPrimo,
@@ -121,11 +140,11 @@ const PullCalculator = () => {
   };
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    document.documentElement.setAttribute('data-theme', newTheme)
-    localStorage.setItem('theme', newTheme)
-  }
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   return (
     <div className="card w-full max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
@@ -136,8 +155,8 @@ const PullCalculator = () => {
             <p>Hitung kebutuhan primogem dan fate Anda</p>
           </div>
           <div>
-          <button onClick={toggleTheme} className="btn btn-ghost btn-circle">
-              {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+            <button onClick={toggleTheme} className="btn btn-ghost btn-circle">
+              {theme === "light" ? <MoonIcon /> : <SunIcon />}
             </button>
           </div>
         </div>
@@ -249,7 +268,9 @@ const PullCalculator = () => {
 
               <div className="mb-2  stats stats-vertical lg:stats-horizontal flex flex-col lg:flex-row shadow w-full">
                 <div className="stat place-items-center flex-1">
-                  <div className="stat-title text-base">Konversi Primo ke Fate</div>
+                  <div className="stat-title text-base">
+                    Konversi Primo ke Fate
+                  </div>
                   <div className="stat-value text-secondary">
                     {results.fateConversion}
                   </div>
@@ -298,13 +319,14 @@ const PullCalculator = () => {
                       {results.pullInfo.map((info, index) => (
                         <li
                           className={`list-none text-md ${
-                            info.includes("50/50")
+                            info.statusText.includes("Tidak bisa") ||
+                            info.statusText.includes("50/50")
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
                           key={index}
                         >
-                          {info}
+                          {info.statusJSX}
                         </li>
                       ))}
                     </ul>
