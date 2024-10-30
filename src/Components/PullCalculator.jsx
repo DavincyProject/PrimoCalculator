@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { MoonIcon, SunIcon, Sparkle } from "lucide-react";
+import { MoonIcon, SunIcon, Sparkle, FileDown } from "lucide-react";
 
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
@@ -91,8 +91,6 @@ const PullCalculator = () => {
       };
     });
 
-    
-
     setResults({
       targetPrimo,
       primoShortage,
@@ -147,9 +145,9 @@ const PullCalculator = () => {
   };
 
   return (
-    <div className="card w-full max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
+    <div className="card w-full max-w-md md:max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
       <div className="card-body">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-between">
           <div>
             <h2 className="card-title">Kalkulator Pull Genshin Impact</h2>
             <p>Hitung kebutuhan primogem dan fate Anda</p>
@@ -244,10 +242,19 @@ const PullCalculator = () => {
         </form>
 
         <div className="flex justify-between mt-4">
-          <button onClick={handleExport} className="btn btn-success">
-            Export Data
+          <button
+            onClick={handleExport}
+            className="group flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1"
+          >
+            <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+              <FileDown color="#ffffff" />
+            </div>
+            <div className="absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+              Export
+            </div>
           </button>
-          <label htmlFor="import-file" className="btn btn-success">
+
+          <label htmlFor="import-file" className="btn btn-warning">
             Import Data
             <input
               id="import-file"
@@ -294,7 +301,7 @@ const PullCalculator = () => {
                 <div className="stat place-items-center ">
                   <div className="stat-title">Status Pull</div>
                   <div
-                    className={`stat-value text-secondary text-md sm:text-base  ${
+                    className={`stat-value text-secondary text-base  ${
                       results.pullStatus == "Sudah bisa pull sesuai target"
                         ? "text-green-500"
                         : "text-red-500"
