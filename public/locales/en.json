@@ -23,5 +23,9 @@
   "CanPull": "Can Pull",
   "CannotPull": "Cannot Pull",
   "GuaranteedBanner": "Guaranteed Banner",
+  "CurrentDesc": "Enter the number of primogems",
+  "FateDesc": "Enter the number of fate",
+  "PityDesc": "Enter the number of pity",
+  "PullDesc": "Enter the target pull",
   "disclaimer": "The translations provided here utilize artificial intelligence (AI) technology and may not be fully accurate. While I strive to provide the most accurate translations possible, there is a possibility of errors or discrepancies in meaning and context."
 }

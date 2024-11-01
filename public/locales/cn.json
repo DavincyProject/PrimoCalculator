@@ -23,5 +23,9 @@
   "CanPull": "可以抽取",
   "CannotPull": "无法抽取",
   "GuaranteedBanner": "保证横幅",
+  "CurrentDesc": "请输入原石数量",
+  "FateDesc": "请输入命运数量",
+  "PityDesc": "请输入 pity 数量",
+  "PullDesc": "请输入目标抽取",
   "disclaimer": "此处提供的翻译使用人工智能 (AI) 技术，可能不完全准确。尽管我努力提供尽可能准确的翻译，但在意义和上下文上可能会存在错误或差异。"
 }

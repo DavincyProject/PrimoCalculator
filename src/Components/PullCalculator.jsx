@@ -224,7 +224,7 @@ const PullCalculator = () => {
                   type="number"
                   value={currentPrimo}
                   onChange={(e) => setCurrentPrimo(e.target.value)}
-                  placeholder="Masukkan jumlah primogem"
+                  placeholder={t.CurrentDesc}
                   className="input input-bordered w-full"
                 />
               </div>
@@ -238,7 +238,7 @@ const PullCalculator = () => {
                   type="number"
                   value={currentFate}
                   onChange={(e) => setCurrentFate(e.target.value)}
-                  placeholder="Masukkan jumlah fate"
+                  placeholder={t.FateDesc}
                   className="input input-bordered w-full"
                 />
               </div>
@@ -253,7 +253,7 @@ const PullCalculator = () => {
                   type="number"
                   value={pity}
                   onChange={(e) => setPity(e.target.value)}
-                  placeholder="Masukkan jumlah pity"
+                  placeholder={t.PityDesc}
                   className="input input-bordered w-full"
                 />
               </div>
@@ -266,7 +266,7 @@ const PullCalculator = () => {
                   type="number"
                   value={targetPulls}
                   onChange={(e) => setTargetPulls(e.target.value)}
-                  placeholder="Masukkan target pull"
+                  placeholder={t.PullDesc}
                   className="input input-bordered w-full"
                 />
               </div>
@@ -377,8 +377,8 @@ const PullCalculator = () => {
                         {results.pullInfo.map((info, index) => (
                           <li
                             className={`list-none text-md ${
-                              info.statusText.includes("Tidak bisa") ||
-                              info.statusText.includes("50/50")
+                              info.statusText.includes(t.CanPull) ||
+                              info.statusText.includes(t.CannotPull)
                                 ? "text-red-500"
                                 : "text-green-500"
                             }`}
