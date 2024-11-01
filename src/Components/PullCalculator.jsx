@@ -26,7 +26,7 @@ const PullCalculator = () => {
   const [targetPulls, setTargetPulls] = useState("");
   const [rateStatus, setRateStatus] = useState("off");
   const [results, setResults] = useState(null);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // language functions
   const [language, setLanguage] = useState("en");
@@ -158,7 +158,7 @@ const PullCalculator = () => {
   };
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
@@ -178,7 +178,7 @@ const PullCalculator = () => {
                 onClick={toggleTheme}
                 className="btn btn-ghost btn-circle"
               >
-                {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
               </button>
             </div>
           </div>
