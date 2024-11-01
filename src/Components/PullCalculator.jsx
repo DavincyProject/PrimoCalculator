@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { MoonIcon, SunIcon, Sparkle, FileDown } from "lucide-react";
+import { MoonIcon, SunIcon, Sparkle, FileDown, Languages } from "lucide-react";
+import useTranslate from "./useTranslate";
 
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
@@ -27,6 +28,16 @@ const PullCalculator = () => {
   const [results, setResults] = useState(null);
   const [theme, setTheme] = useState("light");
 
+  // language functions
+  const [language, setLanguage] = useState("en");
+  const t = useTranslate(language);
+
+  const handleLanguageChange = (e) => {
+    const newLang = e.target.value;
+    setLanguage(newLang);
+    localStorage.setItem("language", newLang); // Simpan pilihan bahasa
+  };
+
   const [savedData, saveData] = useLocalStorage("genshinPullCalculator", {
     currentPrimo: "",
     currentFate: "",
@@ -41,6 +52,9 @@ const PullCalculator = () => {
     setPity(savedData.pity);
     setTargetPulls(savedData.targetPulls);
     setRateStatus(savedData.rateStatus);
+
+    const savedLanguage = localStorage.getItem("language") || "en";
+    setLanguage(savedLanguage);
   }, [savedData]);
 
   const calculateResults = () => {
@@ -54,28 +68,34 @@ const PullCalculator = () => {
     const fateConversion = Math.floor(totalCurrentPrimo / 160);
     const pullStatus =
       fateConversion >= target
-        ? "Sudah bisa pull sesuai target"
-        : "Belum bisa pull sesuai target";
+        ? `${t.TargetPullsAchievable}`
+        : `${t.TargetPullsNotAchievable}`;
     const extraFate = Math.max(0, fateConversion - target);
 
     const pullInfo = [90, 180, 270, 360, 450].map((pulls, index) => {
       const requiredPrimo = pulls * 160;
       const canPull = totalCurrentPrimo >= requiredPrimo;
-      let statusText = canPull ? "Bisa" : "Tidak bisa";
+      let statusText = canPull ? `${t.CanPull}` : `${t.CannotPull}`;
 
       // Tentukan konten tambahan untuk status berdasarkan kondisi
       const sparkleElement = <Sparkle color="#0afbff" />;
       const additionalStatus =
         rateStatus === "on" ? (
           index % 2 === 0 ? (
-            <> , guaranteed banner {sparkleElement}</>
+            <>
+              {" "}
+              , {t.GuaranteedBanner} {sparkleElement}
+            </>
           ) : (
             ", 50/50"
           )
         ) : index % 2 === 0 ? (
           ", 50/50"
         ) : (
-          <> , guaranteed banner {sparkleElement}</>
+          <>
+            {" "}
+            , {t.GuaranteedBanner} {sparkleElement}
+          </>
         );
 
       // Gabungkan status dengan tambahan status jika bisa pull
@@ -145,204 +165,245 @@ const PullCalculator = () => {
   };
 
   return (
-    <div className="card w-full max-w-md md:max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
-      <div className="card-body">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="card-title">Kalkulator Pull Genshin Impact</h2>
-            <p>Hitung kebutuhan primogem dan fate Anda</p>
+    <div className="flex flex-col justify-center items-center w-full bg-gradient-to-r from-slate-900 to-slate-700">
+      <div className="card w-full max-w-md md:max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
+        <div className="card-body">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="card-title">{t.title}</h2>
+              <p>{t.description}</p>
+            </div>
+            <div>
+              <button
+                onClick={toggleTheme}
+                className="btn btn-ghost btn-circle"
+              >
+                {theme === "light" ? <MoonIcon /> : <SunIcon />}
+              </button>
+            </div>
           </div>
-          <div>
-            <button onClick={toggleTheme} className="btn btn-ghost btn-circle">
-              {theme === "light" ? <MoonIcon /> : <SunIcon />}
-            </button>
-          </div>
-        </div>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            calculateResults();
-          }}
-          className="space-y-4"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
-              <label className="label" htmlFor="currentPrimo">
-                <span className="label-text">Primogem Sekarang</span>
-              </label>
-              <input
-                id="currentPrimo"
-                type="number"
-                value={currentPrimo}
-                onChange={(e) => setCurrentPrimo(e.target.value)}
-                placeholder="Masukkan jumlah primogem"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label" htmlFor="currentFate">
-                <span className="label-text">Fate Sekarang</span>
-              </label>
-              <input
-                id="currentFate"
-                type="number"
-                value={currentFate}
-                onChange={(e) => setCurrentFate(e.target.value)}
-                placeholder="Masukkan jumlah fate"
-                className="input input-bordered w-full"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="form-control">
-              <label className="label" htmlFor="pity">
-                <span className="label-text">Pity</span>
-              </label>
-              <input
-                id="pity"
-                type="number"
-                value={pity}
-                onChange={(e) => setPity(e.target.value)}
-                placeholder="Masukkan jumlah pity"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label" htmlFor="targetPulls">
-                <span className="label-text">Target Pull</span>
-              </label>
-              <input
-                id="targetPulls"
-                type="number"
-                value={targetPulls}
-                onChange={(e) => setTargetPulls(e.target.value)}
-                placeholder="Masukkan target pull"
-                className="input input-bordered w-full"
-              />
-            </div>
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="rateStatus">
-              <span className="label-text">Status Rate</span>
+          <div>
+            <label className="label" htmlFor="bahasa">
+              <div
+                className="tooltip tooltip-right tooltip-warning"
+                data-tip={t.disclaimer}
+              >
+                <span className="label-text flex gap-1">
+                  <Languages size={18} />
+                  {t.lang}
+                </span>
+              </div>
             </label>
             <select
-              id="rateStatus"
-              value={rateStatus}
-              onChange={(e) => setRateStatus(e.target.value)}
-              className="select select-bordered w-full"
+              onChange={handleLanguageChange}
+              value={language}
+              className="select select-bordered w-full mb-4"
             >
-              <option value="off">Off</option>
-              <option value="on">On</option>
+              <option value="en">English (US)</option>
+              <option value="id">Indonesia</option>
+              <option value="cn">Chinese</option>
+              <option value="jp">Japanese</option>
             </select>
           </div>
-          <button type="submit" className="btn btn-info w-full">
-            Hitung
-          </button>
-        </form>
 
-        <div className="flex justify-between mt-4">
-          <button
-            onClick={handleExport}
-            className="group flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              calculateResults();
+            }}
+            className="space-y-4"
           >
-            <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
-              <FileDown color="#ffffff" />
-            </div>
-            <div className="absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-              Export
-            </div>
-          </button>
-
-          <label htmlFor="import-file" className="btn btn-warning">
-            Import Data
-            <input
-              id="import-file"
-              type="file"
-              accept=".json"
-              onChange={handleImport}
-              style={{ display: "none" }}
-            />
-          </label>
-        </div>
-
-        {results && (
-          <div className="mt-6 space-y-4">
-            <div className="mockup-code px-2 overflow-x-hidden">
-              <pre data-prefix=">" className="text-success mb-2">
-                <code>Hasil Perhitungan</code>
-              </pre>
-
-              <div className="mb-2  stats stats-vertical lg:stats-horizontal flex flex-col lg:flex-row shadow w-full">
-                <div className="stat place-items-center flex-1">
-                  <div className="stat-title text-base">
-                    Konversi Primo ke Fate
-                  </div>
-                  <div className="stat-value text-secondary">
-                    {results.fateConversion}
-                  </div>
-                </div>
-
-                <div className="stat place-items-center flex-1">
-                  <div className="stat-title">Target Primo yang dikoversi</div>
-                  <div className="stat-value">{results.targetPrimo}</div>
-                  <div className="stat-desc">
-                    Target yang ingin dicapai : {targetPulls}
-                  </div>
-                </div>
-
-                <div className="stat place-items-center flex-1">
-                  <div className="stat-title">Kelebihan Fate</div>
-                  <div className="stat-value">{results.extraFate}</div>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="form-control">
+                <label className="label" htmlFor="currentPrimo">
+                  <span className="label-text">{t.currentPrimo}</span>
+                </label>
+                <input
+                  id="currentPrimo"
+                  type="number"
+                  value={currentPrimo}
+                  onChange={(e) => setCurrentPrimo(e.target.value)}
+                  placeholder="Masukkan jumlah primogem"
+                  className="input input-bordered w-full"
+                />
               </div>
 
-              <div className="stats stats-vertical flex flex-col shadow w-full">
-                <div className="stat place-items-center ">
-                  <div className="stat-title">Status Pull</div>
-                  <div
-                    className={`stat-value text-secondary text-base  ${
-                      results.pullStatus == "Sudah bisa pull sesuai target"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    } `}
-                  >
-                    {results.pullStatus}
-                  </div>
-                </div>
-
-                <div className="stat place-items-center ">
-                  <div className="stat-title">Kekurangan Primo</div>
-                  <div className="stat-value">{results.primoShortage}</div>
-                </div>
-
-                <div className="stat place-items-left ">
-                  <div className="stat-title place-content-center">
-                    Informasi Status Pull
-                  </div>
-                  <div className="stat-value"></div>
-                  <div className="stat-value text-secondary text-base">
-                    <ul className="list-disc list-inside">
-                      {results.pullInfo.map((info, index) => (
-                        <li
-                          className={`list-none text-md ${
-                            info.statusText.includes("Tidak bisa") ||
-                            info.statusText.includes("50/50")
-                              ? "text-red-500"
-                              : "text-green-500"
-                          }`}
-                          key={index}
-                        >
-                          {info.statusJSX}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+              <div className="form-control">
+                <label className="label" htmlFor="currentFate">
+                  <span className="label-text">{t.currentFate}</span>
+                </label>
+                <input
+                  id="currentFate"
+                  type="number"
+                  value={currentFate}
+                  onChange={(e) => setCurrentFate(e.target.value)}
+                  placeholder="Masukkan jumlah fate"
+                  className="input input-bordered w-full"
+                />
               </div>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="form-control">
+                <label className="label" htmlFor="pity">
+                  <span className="label-text">{t.pity}</span>
+                </label>
+                <input
+                  id="pity"
+                  type="number"
+                  value={pity}
+                  onChange={(e) => setPity(e.target.value)}
+                  placeholder="Masukkan jumlah pity"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label" htmlFor="targetPulls">
+                  <span className="label-text">{t.targetPulls}</span>
+                </label>
+                <input
+                  id="targetPulls"
+                  type="number"
+                  value={targetPulls}
+                  onChange={(e) => setTargetPulls(e.target.value)}
+                  placeholder="Masukkan target pull"
+                  className="input input-bordered w-full"
+                />
+              </div>
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="rateStatus">
+                <span className="label-text">{t.statusRate}</span>
+              </label>
+              <select
+                id="rateStatus"
+                value={rateStatus}
+                onChange={(e) => setRateStatus(e.target.value)}
+                className="select select-bordered w-full"
+              >
+                <option value="off">Off (50/50)</option>
+                <option value="on">On (Guaranteed Banner)</option>
+              </select>
+            </div>
+            <button type="submit" className="btn btn-info w-full">
+              {t.calculate}
+            </button>
+          </form>
+
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={handleExport}
+              className="group flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1"
+            >
+              <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+                <FileDown color="#ffffff" />
+              </div>
+              <div className="absolute right-5 transform translate-x-full opacity-0 text-white text-lg font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                {t.export}
+              </div>
+            </button>
+
+            <label htmlFor="import-file" className="btn btn-warning">
+              {t.import}
+              <input
+                id="import-file"
+                type="file"
+                accept=".json"
+                onChange={handleImport}
+                style={{ display: "none" }}
+              />
+            </label>
           </div>
-        )}
+
+          {results && (
+            <div className="mt-6 space-y-4">
+              <div className="mockup-code px-2 overflow-x-hidden">
+                <pre data-prefix=">" className="text-success mb-2">
+                  <code>{t.results}</code>
+                </pre>
+
+                <div className="mb-2  stats stats-vertical lg:stats-horizontal flex flex-col lg:flex-row shadow w-full">
+                  <div className="stat place-items-center flex-1">
+                    <div className="stat-title text-base">
+                      {t.ConvertPrimotoFate}
+                    </div>
+                    <div className="stat-value text-secondary">
+                      {results.fateConversion}
+                    </div>
+                  </div>
+
+                  <div className="stat place-items-center flex-1">
+                    <div className="stat-title">{t.RequiredPrimo}</div>
+                    <div className="stat-value">{results.targetPrimo}</div>
+                    <div className="stat-desc">
+                      {t.TargettoAchieve} {targetPulls}
+                    </div>
+                  </div>
+
+                  <div className="stat place-items-center flex-1">
+                    <div className="stat-title">{t.ExcessFate}</div>
+                    <div className="stat-value">{results.extraFate}</div>
+                  </div>
+                </div>
+
+                <div className="stats stats-vertical flex flex-col shadow w-full">
+                  <div className="stat place-items-center ">
+                    <div className="stat-title">{t.PullStatus}</div>
+                    <div
+                      className={`stat-value text-secondary text-base  ${
+                        results.pullStatus == `${t.TargetPullsAchievable}`
+                          ? "text-green-500"
+                          : "text-red-500"
+                      } `}
+                    >
+                      {results.pullStatus}
+                    </div>
+                  </div>
+
+                  <div className="stat place-items-center ">
+                    <div className="stat-title">
+                      {t.PrimoShortfallfromTarget}
+                    </div>
+                    <div className="stat-value">{results.primoShortage}</div>
+                  </div>
+
+                  <div className="stat place-items-left ">
+                    <div className="stat-title place-content-center">
+                      {t.PullStatusInformation}
+                    </div>
+                    <div className="stat-value"></div>
+                    <div className="stat-value text-secondary text-base">
+                      <ul className="list-disc list-inside">
+                        {results.pullInfo.map((info, index) => (
+                          <li
+                            className={`list-none text-md ${
+                              info.statusText.includes("Tidak bisa") ||
+                              info.statusText.includes("50/50")
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                            key={index}
+                          >
+                            {info.statusJSX}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-center items-center p-6 text-base">
+        <h1 className="font-bold text-white">
+          © 2024 Davincy Project. All rights reserved.
+        </h1>
+        <small className="text-blue-200">
+          All icons and logo are property of their respective owners.
+        </small>
       </div>
     </div>
   );
