@@ -377,10 +377,11 @@ const PullCalculator = () => {
                         {results.pullInfo.map((info, index) => (
                           <li
                             className={`list-none text-md ${
-                              info.statusText.includes(t.CanPull) ||
-                              info.statusText.includes(t.CannotPull)
+                              info.statusText.includes(`${t.CanPull}`)
+                                ? "text-green-500"
+                                : info.statusText.includes(`${t.CannotPull}`)
                                 ? "text-red-500"
-                                : "text-green-500"
+                                : "text-gray-500" // optional fallback if neither condition is met
                             }`}
                             key={index}
                           >
