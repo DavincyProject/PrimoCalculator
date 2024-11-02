@@ -399,7 +399,7 @@ const PullCalculator = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center p-6 text-base">
+      <div className="flex flex-col justify-center items-center p-4 text-base">
         <h1 className="font-bold text-white">
           © 2024 Davincy Project. All rights reserved.
         </h1>
