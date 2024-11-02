@@ -12,6 +12,7 @@
   "import": "Import Data",
   "results": "Calculation Results",
   "ConvertPrimotoFate": "Convert Primo to Fate",
+  "fateConversionInfo": "Fate included",
   "RequiredPrimo": "Required Primo",
   "TargettoAchieve": "Target to Achieve :",
   "ExcessFate": "Excess Fate",

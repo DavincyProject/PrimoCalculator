@@ -330,6 +330,7 @@ const PullCalculator = () => {
                     <div className="stat-value text-secondary">
                       {results.fateConversion}
                     </div>
+                    <div className="stat-desc">{t.fateConversionInfo}</div>
                   </div>
 
                   <div className="stat place-items-center flex-1">
