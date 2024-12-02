@@ -24,7 +24,7 @@ const PullCalculator = () => {
   const [currentFate, setCurrentFate] = useState("");
   const [pity, setPity] = useState("");
   const [targetPulls, setTargetPulls] = useState("");
-  const [rateStatus, setRateStatus] = useState("off");
+  const [rateStatus, setRateStatus] = useState("");
   const [results, setResults] = useState(null);
   const [theme, setTheme] = useState("dark");
 
@@ -43,7 +43,7 @@ const PullCalculator = () => {
     currentFate: "",
     pity: "",
     targetPulls: "",
-    rateStatus: "off",
+    rateStatus: "",
   });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const PullCalculator = () => {
         : `${t.TargetPullsNotAchievable}`;
     const extraFate = Math.max(0, fateConversion - target);
 
-    const pullInfo = [90, 180, 270, 360, 450].map((pulls, index) => {
+    const pullInfo = [90, 180, 270, 360, 450, 540].map((pulls, index) => {
       const requiredPrimo = pulls * 160;
       const canPull = totalCurrentPrimo >= requiredPrimo;
       let statusText = canPull ? `${t.CanPull}` : `${t.CannotPull}`;
@@ -120,7 +120,7 @@ const PullCalculator = () => {
       pullInfo,
     });
 
-    saveData({ currentPrimo, currentFate, pity, targetPulls });
+    saveData({ currentPrimo, currentFate, pity, targetPulls, rateStatus });
   };
 
   const handleExport = () => {
