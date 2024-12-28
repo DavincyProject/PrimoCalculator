@@ -95,43 +95,43 @@ function CVCalculator() {
             <div className="flex gap-2 w-full items-start text-center justify-between px-2 text-xs">
               <span className={`${getTierClass(cv, 0)} flex-1`}>
                 |<br />
-                0 CV
+                0
                 <br />
                 Skip
               </span>
               <span className={`${getTierClass(cv, 10)} flex-1`}>
                 |<br />
-                10 CV
+                10
                 <br />
                 Common
               </span>
               <span className={`${getTierClass(cv, 20)} flex-1`}>
                 |<br />
-                20 CV
+                20
                 <br />
                 Uncommon
               </span>
               <span className={`${getTierClass(cv, 30)} flex-1`}>
                 |<br />
-                30 CV
+                30
                 <br />
                 Rare
               </span>
               <span className={`${getTierClass(cv, 40)} flex-1`}>
                 |<br />
-                40 CV
+                40
                 <br />
                 Epic
               </span>
               <span className={`${getTierClass(cv, 50)} flex-1`}>
                 |<br />
-                50 CV
+                50
                 <br />
                 Legendary
               </span>
               <span className={`${getTierClass(cv, 60)} flex-1`}>
                 |<br />
-                60 CV
+                60
                 <br />
                 GOD
               </span>
