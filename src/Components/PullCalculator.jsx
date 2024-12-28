@@ -146,7 +146,7 @@ const PullCalculator = () => {
         setTargetPulls(importedData.targetPulls);
         setRateStatus(importedData.rateStatus);
         saveData(importedData);
-      } catch (error) {
+      } catch {
         alert(
           `Error importing data from file "${file.name}". Please check the file format.`
         );
@@ -165,7 +165,7 @@ const PullCalculator = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-gradient-to-r from-slate-900 to-slate-700">
+    <div className="flex flex-col justify-center items-center w-full bg-gradient-to-r from-slate-900 to-slate-700 rounded-box">
       <div className="card w-full max-w-md md:max-w-2xl mx-auto bg-base-200 shadow-xl my-4">
         <div className="card-body">
           <div className="flex items-center justify-between">
