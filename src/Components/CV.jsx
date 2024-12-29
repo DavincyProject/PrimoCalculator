@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ImCalculator } from "react-icons/im";
 
 function CVCalculator() {
   const [critRate, setCritRate] = useState("");
@@ -37,7 +38,10 @@ function CVCalculator() {
   return (
     <div className="min-h-screen flex items-center justify-center rounded-box p-2 bg-gradient-to-r from-slate-900 to-slate-700">
       <div className="w-full max-w-md p-6 bg-base-200  rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold  text-center mb-4">CV Calculator</h1>
+        <div className="flex gap-2 items-center justify-center text-2xl font-semibold mb-4">
+          <ImCalculator />
+          <span>CV Calculator</span>
+        </div>
         <form onSubmit={calculateCV} className="space-y-4">
           <div>
             <label htmlFor="critRate" className="form-control w-full">
@@ -46,6 +50,8 @@ function CVCalculator() {
               </div>
               <input
                 type="text"
+                inputMode="numeric"
+                pattern="[0-9.,\s]+"
                 id="critRate"
                 placeholder="example 25.5"
                 value={critRate}
@@ -63,6 +69,8 @@ function CVCalculator() {
               </div>
               <input
                 type="text"
+                inputMode="numeric"
+                pattern="[0-9.,\s]+"
                 id="critDamage"
                 placeholder="example 15.0"
                 value={critDamage}
