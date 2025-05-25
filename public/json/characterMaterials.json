@@ -1,0 +1,450 @@
+{
+  "Skirk": [
+    {
+      "name": "Shivada Jade Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Shivada Jade Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Shivada Jade Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Shivada Jade Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Contention",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Guide to Contention",
+      "required": 63,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Philosophies of Contention",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Meshing Gear", "required": 36, "category": "Enemy Drops" },
+    {
+      "name": "Mechanical Spur Gear",
+      "required": 96,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Artificed Dynamic Gear",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    { "name": "Ensnaring Gaze", "required": 46, "category": "Boss Materials" },
+    {
+      "name": "Ascended Sample: Knight",
+      "required": 18,
+      "category": "Weekly Boss"
+    },
+    {
+      "name": "Skysplit Gembloom",
+      "required": 168,
+      "category": "Local Specialty"
+    },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Arlecchino": [
+    {
+      "name": "Agnidus Agate Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    { "name": "Teachings of Order", "required": 9, "category": "Talent Books" },
+    { "name": "Guide to Order", "required": 63, "category": "Talent Books" },
+    {
+      "name": "Philosophies of Order",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Recruit's Insignia", "required": 36, "category": "Enemy Drops" },
+    {
+      "name": "Sergeant's Insignia",
+      "required": 96,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Lieutenant's Insignia",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Fragment of a Golden Melody",
+      "required": 46,
+      "category": "Boss Materials"
+    },
+    { "name": "Fading Candle", "required": 18, "category": "Weekly Boss" },
+    { "name": "Rainbow Rose", "required": 168, "category": "Local Specialty" },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Citlali": [
+    {
+      "name": "Prithiva Topaz Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Endurance",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Guide to Endurance",
+      "required": 63,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Philosophies of Endurance",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Jagged Stone Shard", "required": 36, "category": "Enemy Drops" },
+    {
+      "name": "Resonant Stone Core",
+      "required": 96,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Obsidian Geode Heart",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Pulsating Earthvein",
+      "required": 46,
+      "category": "Boss Materials"
+    },
+    {
+      "name": "Shard of Ancient Mountain",
+      "required": 18,
+      "category": "Weekly Boss"
+    },
+    {
+      "name": "Sunstone Blossom",
+      "required": 168,
+      "category": "Local Specialty"
+    },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Albedo": [
+    {
+      "name": "Prithiva Topaz Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Prithiva Topaz Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Ballad",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    { "name": "Guide to Ballad", "required": 63, "category": "Talent Books" },
+    {
+      "name": "Philosophies of Ballad",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Divining Scroll", "required": 36, "category": "Enemy Drops" },
+    { "name": "Sealed Scroll", "required": 96, "category": "Enemy Drops" },
+    {
+      "name": "Forbidden Curse Scroll",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    { "name": "Basalt Pillar", "required": 46, "category": "Boss Materials" },
+    {
+      "name": "Tusk of Monoceros Caeli",
+      "required": 18,
+      "category": "Weekly Boss"
+    },
+    { "name": "Cecilia", "required": 168, "category": "Local Specialty" },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Escoffier": [
+    {
+      "name": "Agnidus Agate Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    { "name": "Teachings of Zeal", "required": 9, "category": "Talent Books" },
+    { "name": "Guide to Zeal", "required": 63, "category": "Talent Books" },
+    {
+      "name": "Philosophies of Zeal",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Smoked Meat Scrap", "required": 36, "category": "Enemy Drops" },
+    { "name": "Prime Game Filet", "required": 96, "category": "Enemy Drops" },
+    {
+      "name": "Spiced Marrow Essence",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Everburning Culinary Flame",
+      "required": 46,
+      "category": "Boss Materials"
+    },
+    {
+      "name": "Heart of the Phoenix",
+      "required": 18,
+      "category": "Weekly Boss"
+    },
+    {
+      "name": "Fiery Capsicum",
+      "required": 168,
+      "category": "Local Specialty"
+    },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Mona": [
+    {
+      "name": "Varunada Lazurite Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Varunada Lazurite Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Varunada Lazurite Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Varunada Lazurite Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Resistance",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Guide to Resistance",
+      "required": 63,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Philosophies of Resistance",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    {
+      "name": "Whopperflower Nectar",
+      "required": 36,
+      "category": "Enemy Drops"
+    },
+    { "name": "Shimmering Nectar", "required": 96, "category": "Enemy Drops" },
+    { "name": "Energy Nectar", "required": 129, "category": "Enemy Drops" },
+    { "name": "Cleansing Heart", "required": 46, "category": "Boss Materials" },
+    { "name": "Ring of Boreas", "required": 18, "category": "Weekly Boss" },
+    {
+      "name": "Philanemo Mushroom",
+      "required": 168,
+      "category": "Local Specialty"
+    },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Mavuika": [
+    {
+      "name": "Vajrada Amethyst Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Vajrada Amethyst Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Vajrada Amethyst Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Vajrada Amethyst Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Current",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    { "name": "Guide to Current", "required": 63, "category": "Talent Books" },
+    {
+      "name": "Philosophies of Current",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Static Moth Wing", "required": 36, "category": "Enemy Drops" },
+    { "name": "Charged Moth Dust", "required": 96, "category": "Enemy Drops" },
+    {
+      "name": "Thunderwing Membrane",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Stormcaller's Core",
+      "required": 46,
+      "category": "Boss Materials"
+    },
+    { "name": "Eye of the Tempest", "required": 18, "category": "Weekly Boss" },
+    {
+      "name": "Lightning Reed Stalk",
+      "required": 168,
+      "category": "Local Specialty"
+    },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ],
+  "Kinich": [
+    {
+      "name": "Agnidus Agate Sliver",
+      "required": 1,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Fragment",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Chunk",
+      "required": 9,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Agnidus Agate Gemstone",
+      "required": 6,
+      "category": "Ascension Gems"
+    },
+    {
+      "name": "Teachings of Dominion",
+      "required": 9,
+      "category": "Talent Books"
+    },
+    { "name": "Guide to Dominion", "required": 63, "category": "Talent Books" },
+    {
+      "name": "Philosophies of Dominion",
+      "required": 114,
+      "category": "Talent Books"
+    },
+    { "name": "Sun-Dried Husk", "required": 36, "category": "Enemy Drops" },
+    { "name": "Scorched Carapace", "required": 96, "category": "Enemy Drops" },
+    {
+      "name": "Blazing Soul-Ember",
+      "required": 129,
+      "category": "Enemy Drops"
+    },
+    {
+      "name": "Radiant Sunstone Shard",
+      "required": 46,
+      "category": "Boss Materials"
+    },
+    { "name": "Solar Corona Crest", "required": 18, "category": "Weekly Boss" },
+    { "name": "Solaris Bloom", "required": 168, "category": "Local Specialty" },
+    { "name": "Crown of Insight", "required": 3, "category": "Special" },
+    { "name": "Wanderer's Advice", "required": 3, "category": "EXP Materials" },
+    { "name": "Hero's Wit", "required": 418, "category": "EXP Materials" },
+    { "name": "Mora", "required": 7050100, "category": "Currency" }
+  ]
+}
