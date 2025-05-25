@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { CheckCircle, Circle, ChevronDown, ExternalLink } from "lucide-react";
+import { CheckCircle, Circle, ExternalLink } from "lucide-react"; // ChevronDown tidak lagi diimpor di sini
+import SearchableCharacterDropdown from "./SearchableCharacterDropdown"; // Impor komponen baru
 
 // ... (useEffect hooks dan fungsi lainnya tetap sama seperti sebelumnya) ...
 
@@ -65,6 +66,7 @@ function Ascension() {
       if (savedOwned) {
         try {
           setOwned(JSON.parse(savedOwned));
+          // eslint-disable-next-line no-unused-vars
         } catch (error) {
           setOwned({});
         }
@@ -108,8 +110,9 @@ function Ascension() {
     }
   }, [selectedCharacter, isInitialDataLoading]);
 
-  const handleCharacterChange = (event) => {
-    setSelectedCharacter(event.target.value);
+  // ***** PERUBAHAN HANDLER *****
+  const handleCharacterSelect = (characterName) => {
+    setSelectedCharacter(characterName);
   };
 
   const updateOwned = (materialName, amount) => {
@@ -171,8 +174,13 @@ function Ascension() {
             />
           </svg>
           <span>
-            Gagal memuat data karakter. Pastikan file JSON ada dan formatnya
-            benar.
+            Gagal memuat data karakter. Pastikan file JSON (
+            <code className="kbd kbd-sm text-error-content">
+              /json/characterMaterials.json
+            </code>
+            ) ada di folder{" "}
+            <code className="kbd kbd-sm text-error-content">public</code> dan
+            formatnya benar.
           </span>
         </div>
       </div>
@@ -185,29 +193,20 @@ function Ascension() {
         <div className="card-body p-4 md:p-8">
           {/* Header Section */}
           <div className="mb-6 md:mb-8">
+            {/* ... (Isi Header Section tetap sama, termasuk SearchableCharacterDropdown dan Progress Bar) ... */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <h1 className="card-title text-2xl lg:text-3xl font-bold text-primary break-words">
                 {selectedCharacter
                   ? `${selectedCharacter} Ascension`
                   : "Pilih Karakter"}
               </h1>
-              <div className="w-full md:w-auto md:min-w-[250px] relative">
-                <select
-                  className="select select-primary select-bordered w-full appearance-none pr-10"
-                  value={selectedCharacter || ""}
-                  onChange={handleCharacterChange}
-                  disabled={characterNames.length === 0}
-                  aria-label="Pilih Karakter"
-                >
-                  {characterNames.length === 0 && <option>Memuat...</option>}
-                  {characterNames.map((name) => (
-                    <option key={name} value={name}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary pointer-events-none" />
-              </div>
+              <SearchableCharacterDropdown
+                options={characterNames}
+                selectedOption={selectedCharacter}
+                onChange={handleCharacterSelect}
+                placeholder="Pilih Karakter..."
+                disabled={characterNames.length === 0 || isInitialDataLoading}
+              />
             </div>
             {selectedCharacter && !isLoadingOwned && (
               <div className="mt-4">
@@ -241,9 +240,9 @@ function Ascension() {
 
           {/* Loading atau Konten Material */}
           {isLoadingOwned && selectedCharacter ? (
-            <div className="flex flex-col items-center justify-center py-10 min-h-60">
+            <div className="flex flex-col items-center justify-center py-10 min-h-80">
               {" "}
-              {/* min-h untuk ruang loading */}
+              {/* min-h-80 dipertahankan untuk placeholder */}
               <span className="loading loading-spinner loading-md text-primary mb-3"></span>
               <p className="text-base-content/70">
                 Memuat material untuk {selectedCharacter}...
@@ -252,13 +251,9 @@ function Ascension() {
           ) : !selectedCharacter && characterNames.length > 0 ? (
             <div
               role="alert"
-              className="alert alert-info min-h-60 flex items-center justify-center"
+              className="alert alert-info min-h-80 flex items-center justify-center" // min-h-80 dipertahankan
             >
-              {" "}
-              {/* min-h dan flex untuk centering */}
               <div>
-                {" "}
-                {/* Wrapper untuk konten alert */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -280,13 +275,9 @@ function Ascension() {
           ) : materials.length === 0 && selectedCharacter ? (
             <div
               role="alert"
-              className="alert min-h-60 flex items-center justify-center"
+              className="alert min-h-80 flex items-center justify-center" // min-h-80 dipertahankan
             >
-              {" "}
-              {/* min-h dan flex untuk centering */}
               <div>
-                {" "}
-                {/* Wrapper untuk konten alert */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -307,13 +298,22 @@ function Ascension() {
               </div>
             </div>
           ) : (
-            // ***** PERUBAHAN DI SINI *****
-            <div className="space-y-8 max-h-[calc(100vh-30rem)] md:max-h-[calc(100vh-25rem)] lg:max-h-[calc(100vh-22rem)] overflow-y-auto pr-2 md:pr-3 custom-scrollbar">
-              {/* Penjelasan max-h:
-                - max-h-[calc(100vh-Yrem)]: Menggunakan unit viewport height (vh) dikurangi perkiraan tinggi elemen lain di luar daftar ini (header kartu, header utama halaman, footer, padding, dll.). Anda mungkin perlu menyesuaikan nilai Yrem.
-                - max-h-80 md:max-h-96 lg:max-h-[32rem] : Alternatif menggunakan nilai tetap responsif.
-                - pr-2 md:pr-3 : Menambahkan sedikit padding di kanan untuk memberi ruang pada scrollbar (terutama jika bukan overlay scrollbar).
-                - custom-scrollbar : Anda bisa menambahkan kelas ini untuk styling scrollbar kustom jika mau (lihat catatan di bawah).
+            // ***** PERUBAHAN max-h DI SINI *****
+            <div className="space-y-8 max-h-[calc(100dvh-20rem)] sm:max-h-[calc(100dvh-22rem)] md:max-h-[calc(100dvh-24rem)] lg:max-h-[calc(100dvh-20rem)] overflow-y-auto pr-2 md:pr-3 custom-scrollbar">
+              {/* Penjelasan nilai max-h baru:
+                - Mobile (default): max-h-[calc(100dvh-20rem)]
+                  (100dvh dikurangi 20rem / 320px untuk elemen lain di luar list)
+                - Small screens (sm): max-h-[calc(100dvh-22rem)]
+                  (Offset sedikit lebih besar karena mungkin ada perubahan layout minor atau untuk kenyamanan)
+                - Medium screens (md): max-h-[calc(100dvh-24rem)]
+                  (Offset disesuaikan lagi)
+                - Large screens (lg): max-h-[calc(100dvh-20rem)]
+                  (Bisa jadi offset di layar besar kembali mirip mobile jika header dll lebih compact atau ingin area scroll lebih luas)
+
+                Anda SANGAT PERLU menyesuaikan angka '20rem', '22rem', '24rem' ini 
+                berdasarkan tinggi aktual dari elemen-elemen lain di halaman Anda 
+                (header utama aplikasi, footer, padding di sekitar kartu, header di dalam kartu, dll.) 
+                agar daftar material mendapatkan sisa ruang yang optimal.
             */}
               {Object.entries(groupedMaterials).map(
                 ([category, categoryMaterials]) => (
@@ -324,18 +324,16 @@ function Ascension() {
                       .toLowerCase()}`}
                     className="mb-6 last:mb-0"
                   >
-                    {" "}
-                    {/* mb-6 untuk jarak antar kategori, last:mb-0 agar tidak ada margin di bawah item terakhir */}
                     <h2
                       id={`category-title-${category
                         .replace(/\s+/g, "-")
                         .toLowerCase()}`}
                       className="text-xl font-semibold text-accent border-b-2 border-accent/30 pb-2 mb-4 sticky top-0 bg-base-100 z-10 py-2"
                     >
-                      {/* sticky top-0 bg-base-100 z-10 py-2: Membuat judul kategori "lengket" di atas saat scroll di dalam kontainer ini */}
                       {category}
                     </h2>
                     <div className="space-y-3">
+                      {/* ... (Isi mapping material item tetap sama) ... */}
                       {categoryMaterials.map((material) => {
                         const remaining = getRemaining(material);
                         const completed = isCompleted(material);
@@ -419,16 +417,17 @@ function Ascension() {
             </div>
           )}
 
+          {/* ... (Pesan Selamat tetap sama) ... */}
           {allMaterialsCollected &&
             materials.length > 0 &&
             !isLoadingOwned &&
             selectedCharacter && (
-              <div role="alert" className="alert alert-success mt-8 shadow-lg">
-                <CheckCircle className="stroke-current shrink-0 h-6 w-6" />
+              <div role="alert" className="alert alert-warning mt-8 shadow-lg">
+                <CheckCircle className="stroke-current shrink-0 h-6 w-6 text-green-500" />
                 <div>
-                  <h3 className="font-bold text-lg">
-                    🎉 Selamat, {selectedCharacter} kamu sudah bisa dibuild ke
-                    lvl maksimal!
+                  <h3 className="font-bold text-lg text-white">
+                    🎉 Selamat, karakter {selectedCharacter} kamu sudah bisa ke
+                    level maksimal!
                   </h3>
                   <div className="text-md">
                     Semua material telah terkumpul. Saatnya level up!
